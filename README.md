@@ -1,4 +1,3 @@
-# CriptoJunio
 # 🔐 Projeto: Criptografia de César com Interface e Banco de Dados
 
 Este projeto implementa a Cifra de César com autenticação de usuário, interface interativa (React) e persistência em banco de dados (PostgreSQL via Prisma). A proposta segue os requisitos de um trabalho prático acadêmico.
@@ -41,23 +40,28 @@ Para iniciar o banco PostgreSQL com Docker:
 
 ```bash
 docker-compose up -d
+```
 
-Acesso padrão:
+### Acesso padrão:
+- Usuário: `admin`
+- Senha: `admin123`
+- Banco: `cripto`
+- Porta: `5432`
 
-    Usuário: admin
+---
 
-    Senha: admin123
+## 🔧 Setup do Projeto
 
-    Banco: cripto
+### 1. Clone o repositório
 
-    Porta: 5432
-
-🔧 Setup do Projeto
-1. Clone o repositório
+```bash
 git clone https://github.com/seu-usuario/cripto-app.git
 cd cripto-app
+```
 
-2. Configure o Backend
+### 2. Configure o Backend
+
+```bash
 cd backend
 npm install
 cp .env.example .env
@@ -65,13 +69,21 @@ cp .env.example .env
 npx prisma migrate dev --name init
 npx prisma generate
 npm run dev
+```
 
-3. Configure o Frontend
+### 3. Configure o Frontend
+
+```bash
 cd ../frontend
 npm install
 npm run dev
+```
 
-📂 Estrutura de Pastas
+---
+
+## 📂 Estrutura de Pastas
+
+```
 cripto-app/
 ├── backend/
 │   ├── prisma/
@@ -82,16 +94,18 @@ cripto-app/
 │   └── public/
 ├── docker-compose.yml
 └── README.md
-
-✍️ Autores
-Alexsander Ramos Ferreira
-Joel Alves Neto
-Desenvolvedor de Software | FATEC Votorantim
-Contato: 
-
-📜 Licença
-Este projeto é apenas para fins acadêmicos.
+```
 
 ---
 
-Você quer que eu já gere esse `README.md` como um arquivo pronto e envie? Ou você quer que eu siga agora para o `index.js` com Express e as rotas?
+## ✍️ Autor
+
+**Alexsander Ramos Ferreira**  
+Desenvolvedor de Software | FATEC Votorantim  
+Contato: [Seu LinkedIn ou GitHub]
+
+---
+
+## 📜 Licença
+
+Este projeto é apenas para fins acadêmicos.
