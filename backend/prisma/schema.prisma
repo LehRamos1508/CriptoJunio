@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  password String
+}
+
+model HashAccess {
+  id        Int      @id @default(autoincrement())
+  hash      String   @unique
+  step      Int
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+
+
+
+
+
+
+
+
+
+
+// docker run --name postgres-CriptoJunio \
+//   -e POSTGRES_USER=admin \
+//   -e POSTGRES_PASSWORD=admin123 \
+//   -e POSTGRES_DB=CriptoJunio \
+//   -p 5432:5432 \
+//   -d postgres
