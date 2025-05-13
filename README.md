@@ -98,11 +98,12 @@ cripto-app/
 
 ---
 
-## ✍️ Autor
+## ✍️ Autores
 
 **Alexsander Ramos Ferreira**  
-Desenvolvedor de Software | FATEC Votorantim  
-Contato: [Seu LinkedIn ou GitHub]
+**Joel de Farias Alves Neto**  
+Desenvolvedores de Software | FATEC Votorantim  
+Contato: 
 
 ---
 
