@@ -83,14 +83,13 @@ cripto-app/
 ├── docker-compose.yml
 └── README.md
 
-✍️ Autor
-
+✍️ Autores
 Alexsander Ramos Ferreira
 Joel Alves Neto
 Desenvolvedor de Software | FATEC Votorantim
 Contato: 
-📜 Licença
 
+📜 Licença
 Este projeto é apenas para fins acadêmicos.
 
 ---
