@@ -1,4 +1,3 @@
-// 📁 backend/src/index.js
 import express from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
@@ -12,12 +11,12 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
-app.use(logger); // middleware de log
+app.use(logger);
 
 app.use("/auth", authRoutes);
 app.use("/crypto", cryptoRoutes);
 
-app.use(errorHandler); // middleware de erro (padrão global)
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
