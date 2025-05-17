@@ -3,10 +3,11 @@ import {
   encryptMessage,
   decryptMessage,
 } from "../controllers/crypto.controller.js";
+import { ensureAuthenticate } from "../Middlewares/authorization.js";
 
 const router = express.Router();
 
-router.post("/encrypt", encryptMessage);
-router.post("/decrypt", decryptMessage);
+router.post("/encrypt", ensureAuthenticate, encryptMessage);
+router.post("/decrypt", ensureAuthenticate, decryptMessage);
 
 export default router;
