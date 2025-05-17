@@ -1,63 +1,68 @@
 import { useState } from "react";
-import api from "../services/api";
+import api from "../../services/api";
 
-type DecryptResponse = {
-  decrypted: string;
+type EncryptResponse = {
+  encrypted: string;
+  hash: string;
 };
 
-export default function Decriptografar() {
+export default function Criptografar() {
   const [message, setMessage] = useState("");
+  const [step, setStep] = useState<number>(3); // valor padrão
+  const [encrypted, setEncrypted] = useState("");
   const [hash, setHash] = useState("");
-  const [decrypted, setDecrypted] = useState("");
   const [error, setError] = useState("");
 
-  async function handleDecrypt(e: React.FormEvent) {
+  async function handleEncrypt(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    setDecrypted("");
+    setEncrypted("");
+    setHash("");
 
     try {
-      const response = await api.post<DecryptResponse>("/crypto/decrypt", {
+      const response = await api.post<EncryptResponse>("/crypto/encrypt", {
         message,
-        hash,
+        step,
       });
 
-      setDecrypted(response.data.decrypted);
+      setEncrypted(response.data.encrypted);
+      setHash(response.data.hash);
     } catch (err: any) {
-      const msg = err?.response?.data?.error || "Erro ao descriptografar";
+      const msg = err?.response?.data?.error || "Erro ao criptografar";
       setError(msg);
     }
   }
 
   return (
     <div style={styles.container}>
-      <h2>Decriptografar Mensagem</h2>
-      <form onSubmit={handleDecrypt} style={styles.form}>
+      <h2>Criptografar Mensagem</h2>
+      <form onSubmit={handleEncrypt} style={styles.form}>
         <textarea
-          placeholder="Mensagem criptografada"
+          placeholder="Digite a mensagem"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
           style={styles.textarea}
         />
         <input
-          type="text"
-          placeholder="Hash (chave privada)"
-          value={hash}
-          onChange={(e) => setHash(e.target.value)}
+          type="number"
+          placeholder="Passo"
+          value={step}
+          onChange={(e) => setStep(Number(e.target.value))}
           required
           style={styles.input}
         />
         <button type="submit" style={styles.button}>
-          Decriptografar
+          Criptografar
         </button>
       </form>
 
       {error && <p style={styles.error}>{error}</p>}
 
-      {decrypted && (
+      {encrypted && (
         <div style={styles.result}>
-          <p><strong>Mensagem Original:</strong> {decrypted}</p>
+          <p><strong>Mensagem Criptografada:</strong> {encrypted}</p>
+          <p><strong>Hash (chave privada):</strong> {hash}</p>
         </div>
       )}
     </div>
@@ -90,7 +95,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   button: {
     padding: "10px",
-    backgroundColor: "#6f42c1",
+    backgroundColor: "#28a745",
     color: "white",
     fontWeight: "bold",
     border: "none",
@@ -106,5 +111,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: "15px",
     border: "1px solid #ccc",
     borderRadius: "5px",
+    color: "#000"
   },
 };

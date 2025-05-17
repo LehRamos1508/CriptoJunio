@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
-
-// Define o tipo esperado da resposta do backend
-type LoginResponse = {
-  message: string;
-  userId: number;
-};
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -14,20 +8,14 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const { login } = useAuth();
+
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError("");
 
     try {
-      const response = await api.post<LoginResponse>("/auth/login", {
-        username,
-        password,
-      });
-
-      // Armazena o userId no localStorage
-      localStorage.setItem("userId", response.data.userId.toString());
-
-      // Redireciona para a próxima página
+      await login(username, password);
       navigate("/criptografar");
     } catch (err: any) {
       const msg = err?.response?.data?.error || "Erro ao fazer login";
@@ -64,7 +52,6 @@ export default function Login() {
   );
 }
 
-// Estilos básicos
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     maxWidth: "400px",
