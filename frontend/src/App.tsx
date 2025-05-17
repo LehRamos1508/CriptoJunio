@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { AuthProvider } from "./contexts/AuthContext";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/auth/Login";
+import Criptografar from "./pages/private/Criptografar";
+import Decriptografar from "./pages/private/Decriptografar";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import Page from "./pages/private/Page";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Page />
+              </PrivateRoute>
+            }
+          >
+            <Route path="criptografar" element={<Criptografar />} />
+            <Route path="decriptografar" element={<Decriptografar />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
