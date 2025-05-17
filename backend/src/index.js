@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import { PrismaClient } from "@prisma/client";
 import authRoutes from "./routes/auth.routes.js";
 import cryptoRoutes from "./routes/crypto.routes.js";
 import { logger } from "./Middlewares/logger.js";

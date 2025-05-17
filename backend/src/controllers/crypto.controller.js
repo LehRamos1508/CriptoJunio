@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
-
-const prisma = new PrismaClient();
+import {prisma} from "../database/index.js";
 
 function caesarCipher(text, step, decrypt = false) {
   const s = decrypt ? -step : step;
@@ -15,7 +13,7 @@ export async function encryptMessage(req, res, next) {
   const { message, step } = req.body;
 
   if (!message || step === undefined) {
-    return res.status(400).json({ error: "Mensagem e passo são obrigatórios" });
+    return res.status(400).json({ success: false, error: "Mensagem e passo são obrigatórios" });
   }
 
   const encrypted = caesarCipher(message, step);
@@ -29,7 +27,7 @@ export async function encryptMessage(req, res, next) {
       },
     });
 
-    return res.status(200).json({ encrypted, hash });
+    return res.status(200).json({ success: true, encrypted, hash });
   } catch (err) {
     next(err);
   }
@@ -39,14 +37,14 @@ export async function decryptMessage(req, res, next) {
   const { message, hash } = req.body;
 
   if (!message || !hash) {
-    return res.status(400).json({ error: "Mensagem e hash são obrigatórios" });
+    return res.status(400).json({ success: false, error: "Mensagem e hash são obrigatórios" });
   }
 
   try {
     const record = await prisma.hashAccess.findUnique({ where: { hash } });
 
-    if (!record) return res.status(404).json({ error: "Hash não encontrado" });
-    if (record.used) return res.status(403).json({ error: "Hash já foi usado" });
+    if (!record) return res.status(404).json({ success: false, error: "Hash não encontrado" });
+    if (record.used) return res.status(403).json({ success: false, error: "Hash já foi usado" });
 
     const decrypted = caesarCipher(message, record.step, true);
 
@@ -55,7 +53,7 @@ export async function decryptMessage(req, res, next) {
       data: { used: true },
     });
 
-    return res.status(200).json({ decrypted });
+    return res.status(200).json({ success: true, decrypted });
   } catch (err) {
     next(err);
   }
