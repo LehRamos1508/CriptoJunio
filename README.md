@@ -26,11 +26,13 @@ Este projeto implementa a Cifra de César com autenticação de usuário, interf
 - Express
 - Prisma ORM
 - PostgreSQL (via Docker)
+- JSON Web Token (JWT)
 
 ### 🎨 Frontend
 - React (com Vite)
 - Axios (para requisições)
 - React Router DOM
+- JS Cookies
 
 ---
 
