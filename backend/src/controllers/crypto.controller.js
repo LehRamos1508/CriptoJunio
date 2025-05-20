@@ -1,11 +1,20 @@
 import crypto from "crypto";
 import {prisma} from "../database/index.js";
 
+// function caesarCipher(text, step, decrypt = false) {
+//   const s = decrypt ? -step : step;
+//   return text.replace(/[a-z]/gi, (char) => {
+//     const base = char === char.toUpperCase() ? 65 : 97;
+//     return String.fromCharCode(((char.charCodeAt(0) - base + s + 26) % 26) + base);
+//   });
+// }
+
 function caesarCipher(text, step, decrypt = false) {
-  const s = decrypt ? -step : step;
+  const s = ((decrypt ? -step : step) % 26 + 26) % 26;
   return text.replace(/[a-z]/gi, (char) => {
-    const base = char === char.toUpperCase() ? 65 : 97;
-    return String.fromCharCode(((char.charCodeAt(0) - base + s + 26) % 26) + base);
+    const isUpper = char >= 'A' && char <= 'Z';
+    const base = isUpper ? 65 : 97;
+    return String.fromCharCode(((char.charCodeAt(0) - base + s) % 26) + base);
   });
 }
 
