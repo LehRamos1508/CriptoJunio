@@ -25,7 +25,13 @@ export default function Login() {
 
   return (
     <div style={styles.container}>
-      <h2>Login</h2>
+      <h2
+        style={{
+          color: "#000",
+        }}
+      >
+        Login
+      </h2>
       <form onSubmit={handleLogin} style={styles.form}>
         <input
           type="text"

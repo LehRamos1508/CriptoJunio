@@ -31,7 +31,13 @@ export default function Decriptografar() {
 
   return (
     <div style={styles.container}>
-      <h2>Decriptografar Mensagem</h2>
+      <h2
+        style={{
+          color: "#000",
+        }}
+      >
+        Decriptografar Mensagem
+      </h2>
       <form onSubmit={handleDecrypt} style={styles.form}>
         <textarea
           placeholder="Mensagem criptografada"
@@ -57,7 +63,9 @@ export default function Decriptografar() {
 
       {decrypted && (
         <div style={styles.result}>
-          <p><strong>Mensagem Original:</strong> {decrypted}</p>
+          <p>
+            <strong>Mensagem Original:</strong> {decrypted}
+          </p>
         </div>
       )}
     </div>
@@ -106,6 +114,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: "15px",
     border: "1px solid #ccc",
     borderRadius: "5px",
-    color:  "#000"
+    color: "#000",
   },
 };

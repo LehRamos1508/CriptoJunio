@@ -35,7 +35,13 @@ export default function Criptografar() {
 
   return (
     <div style={styles.container}>
-      <h2>Criptografar Mensagem</h2>
+      <h2
+        style={{
+          color: "#000",
+        }}
+      >
+        Criptografar Mensagem
+      </h2>
       <form onSubmit={handleEncrypt} style={styles.form}>
         <textarea
           placeholder="Digite a mensagem"
@@ -61,8 +67,12 @@ export default function Criptografar() {
 
       {encrypted && (
         <div style={styles.result}>
-          <p><strong>Mensagem Criptografada:</strong> {encrypted}</p>
-          <p><strong>Hash (chave privada):</strong> {hash}</p>
+          <p>
+            <strong>Mensagem Criptografada:</strong> {encrypted}
+          </p>
+          <p>
+            <strong>Hash (chave privada):</strong> {hash}
+          </p>
         </div>
       )}
     </div>
@@ -111,6 +121,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: "15px",
     border: "1px solid #ccc",
     borderRadius: "5px",
-    color: "#000"
+    color: "#000",
   },
 };
